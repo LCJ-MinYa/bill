@@ -8,7 +8,7 @@ const db = cloud.database();
 
 exports.main = async (event, context) => {
     return await db.collection('bill')
-        .orderBy('createTime', 'desc')
+        .orderBy('date.timestamp', 'desc')
         .where({
             openid: event.userInfo.openId
         })

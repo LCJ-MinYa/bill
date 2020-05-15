@@ -1,4 +1,5 @@
 <wxs src="../../wxs/price.wxs" module="price" />
+<wxs src="../../wxs/date.wxs" module="date" />
 <view class="container">
     <view class="head-wrap">
         <view class="balance-box">
@@ -47,7 +48,7 @@
                     <view class="money">
                         {{item.typeId == 2 ? '-' : ''}}{{price.toFixed(item.money)}}
                     </view>
-                    <view class="detail">{{item.date.timeString}}</view>
+                    <view class="detail">{{date.getGap(item.date.timeString)}}</view>
                 </view>
             </view>
             <view wx:if="{{item.comment}}" class="bill-comment-box">{{item.comment}}</view>

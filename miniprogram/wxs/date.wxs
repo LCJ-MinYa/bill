@@ -1,0 +1,31 @@
+/**
+    * 处理日期显示
+*/
+function getGapTime(date) {  //传入的date为‘yyyy-mm-dd hh:mm:ss’形式的
+    var re = "00"
+
+    var timestamp = getDate().getTime();//wxs中不能使用js中的Date()函数，只能使用getDate()来获取当前标准时间，getTime()函数可以用来将标准时间转换为时间戳，单位为ms
+    timestamp = parseInt(timestamp / 1000);
+    //发表文章的时间戳 s
+    var publicstamp = getDate(date).getTime();
+    publicstamp = parseInt(publicstamp / 1000)
+    //时间差s
+    var gap = timestamp - publicstamp
+
+    if (gap < 60 * 60 * 24) {
+        re = "今天"
+    } else if (gap < 60 * 60 * 24 * 2) {
+        re = "昨天"
+    } else if (gap < 60 * 60 * 24 * 3) {
+        re = "前天"
+    } else {
+        re = date.substring(0, 10)  //时间超过1个月返回具体的 年-月-日
+    }
+    return re;
+}
+
+//将自定义函数暴露出来
+//形式为    对外使用的函数名：wxs中定义的函数名
+module.exports = {
+    getGap: getGapTime
+}

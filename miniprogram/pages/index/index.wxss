@@ -1,3 +1,8 @@
+.container {
+    position: relative;
+    height: auto !important;
+}
+
 .add-btn {
     position: fixed;
     bottom: 40rpx;
@@ -28,6 +33,7 @@
     align-items: center;
     flex-direction: column;
     padding: 50rpx 40rpx;
+    z-index: 9;
 }
 
 .balance-box {
