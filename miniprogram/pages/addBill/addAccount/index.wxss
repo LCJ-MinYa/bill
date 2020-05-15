@@ -1,0 +1,7 @@
+.container {
+    background: #f5f5f5;
+}
+
+.van-field__input--disabled {
+    color: #323232 !important;
+}

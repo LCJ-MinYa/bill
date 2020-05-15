@@ -1,0 +1,7 @@
+{
+    "usingComponents": {
+        "steps": "/components/view/steps/index",
+        "confirmButton": "/components/button/confirmButton/index"
+    },
+    "navigationBarTitleText": "选择我的账户"
+}

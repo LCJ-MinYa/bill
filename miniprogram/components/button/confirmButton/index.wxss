@@ -1,0 +1,19 @@
+.button_box {
+    width: 80%;
+    height: 80rpx;
+    margin: 0 auto;
+    text-align: center;
+    border-radius: 10rpx;
+    color: #fff;
+    font-size: 25rpx;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.fixed {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

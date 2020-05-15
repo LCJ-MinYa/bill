@@ -1,0 +1,19 @@
+<view class="container">
+    <view class="title">佚名记账</view>
+    <view class="content">
+        <view>知乎上有一个很热门的话题“穷是一种什么体验”</view>
+        <view>穷最大的感触的就是羡慕身边每一个人</view>
+        <view>羡慕他们能过着诗与远方的生活</view>
+        <view>几年前，我相信“钱不是省出来的”</view>
+        <view>但现在我明白真正能兼顾主业副业的人</view>
+        <view>于他们没有“强制存钱”的问题困扰</view>
+        <view>而相较于大部分的普通年轻人</view>
+        <view>早期的赚钱能力和渠道有限</view>
+        <view>清楚地记录每一笔何时何地的消费</view>
+        <view>一边“开源”，一边“节流”</view>
+        <view>给自己立一个简单的flag</view>
+        <view>随时花、随时记的记账好习惯</view>
+        <view>当你银行卡或钱包鼓鼓的时候</view>
+        <view>去更大的世界，追求诗与远方</view>
+    </view>
+</view>

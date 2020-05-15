@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "steps": "/components/view/steps/index"
+    },
+    "navigationBarTitleText": "选择记账类型"
+}

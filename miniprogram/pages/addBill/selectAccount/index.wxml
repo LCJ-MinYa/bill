@@ -1,0 +1,19 @@
+<view class="container">
+    <steps list="{{stepsList}}" />
+    <view class="account-list-box" wx:if="{{accountList.length > 0}}">
+        <view class="account-item-box" wx:for="{{accountList}}" wx:key="key" wx:for-index="index" wx:for-item="item" data-index="{{item._id}}" bindtap="goSelectPayAccount">
+            <view wx:if="{{item.accountType.id == 1}}" class="iconfont icon-weixinzhifu"></view>
+            <view wx:elif="{{item.accountType.id == 2}}" class="iconfont icon-zhifubao"></view>
+            <view wx:else class="iconfont icon-yinhangqia1"></view>
+            <view class="name">{{item.accountName}}-{{item.accountType.name}}</view>
+            <view class="detail" wx:if="{{item.accountType.id == 3 || item.accountType.id == 4}}">
+                ({{item.accountTypeDetail}})
+            </view>
+        </view>
+    </view>
+    <view class="no-account-box" wx:else>
+        <view class="iconfont icon-meiyoushuju"></view>
+        <view>您还未添加账户，快去添加吧~</view>
+    </view>
+    <confirmButton text="添加我的账户" position="fixed" bind:clickBtn="clickBtn" />
+</view>

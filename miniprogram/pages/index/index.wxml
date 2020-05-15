@@ -1,0 +1,59 @@
+<wxs src="../../wxs/price.wxs" module="price" />
+<view class="container">
+    <view class="head-wrap">
+        <view class="balance-box">
+            <view class="price">{{price.toFixed(balance)}}</view>
+            <view class="title">{{balanceTitle}}</view>
+        </view>
+        <view class="income-expense-box">
+            <view>
+                <view class="price">{{price.toFixed(income)}}</view>
+                <view class="title">{{incomeTitle}}</view>
+            </view>
+            <view>
+                <view class="price">{{price.toFixed(expense)}}</view>
+                <view class="title">{{expenseTitle}}</view>
+            </view>
+        </view>
+    </view>
+    <view class="bill-box">
+        <view class="bill-item-box" wx:for="{{billList}}" wx:key="key" wx:for-index="index" wx:for-item="item">
+            <view class="bill-content-box">
+                <view class="bill-account-box">
+                    <view class="account-item-box">
+                        <view wx:if="{{item.userAccount.accountType.id == 1}}" class="iconfont icon-weixinzhifu"></view>
+                        <view wx:elif="{{item.userAccount.accountType.id == 2}}" class="iconfont icon-zhifubao"></view>
+                        <view wx:else class="iconfont icon-yinhangqia1"></view>
+                        <view class="name">
+                            {{item.userAccount.accountName}}-{{item.userAccount.accountType.name}}
+                        </view>
+                        <view class="detail" wx:if="{{item.userAccount.accountType.id == 3 || item.userAccount.accountType.id == 4}}">
+                            ({{item.userAccount.accountTypeDetail}})
+                        </view>
+                    </view>
+                    <view class="account-item-box">
+                        <view wx:if="{{item.payAccount.accountType.id == 1}}" class="iconfont icon-weixinzhifu"></view>
+                        <view wx:elif="{{item.payAccount.accountType.id == 2}}" class="iconfont icon-zhifubao"></view>
+                        <view wx:else class="iconfont icon-yinhangqia1"></view>
+                        <view class="name">
+                            {{item.payAccount.accountName}}-{{item.payAccount.accountType.name}}
+                        </view>
+                        <view class="detail" wx:if="{{item.payAccount.accountType.id == 3 || item.payAccount.accountType.id == 4}}">
+                            ({{item.payAccount.accountTypeDetail}})
+                        </view>
+                    </view>
+                </view>
+                <view class="bill-msg-box">
+                    <view class="money">
+                        {{item.typeId == 2 ? '-' : ''}}{{price.toFixed(item.money)}}
+                    </view>
+                    <view class="detail">{{item.date.timeString}}</view>
+                </view>
+            </view>
+            <view wx:if="{{item.comment}}" class="bill-comment-box">{{item.comment}}</view>
+        </view>
+    </view>
+    <button class="add-btn" hover-class="add-btn-hover" bindtap="goAddBook">
+        <van-icon name="plus" color="#fff" size="50rpx" />
+    </button>
+</view>

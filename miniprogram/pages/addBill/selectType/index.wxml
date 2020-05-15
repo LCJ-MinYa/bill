@@ -1,0 +1,9 @@
+<view class="container">
+    <steps list="{{stepsList}}" />
+    <view class="type-box">
+        <view class="type-item" wx:for="{{typeList}}" wx:key="key" wx:for-index="index" wx:for-item="item" data-index="{{item.id}}" bindtap="goSelectAccount">
+            <view class="iconfont {{item.icon}}"></view>
+            <view class="name">{{item.name}}</view>
+        </view>
+    </view>
+</view>

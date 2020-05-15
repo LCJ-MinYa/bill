@@ -1,0 +1,3 @@
+<view class="button_box {{position == 'fixed' ? 'fixed' : ''}}" style="bottom: {{position == 'fixed' && marginButtom ? marginButtom : 0}}rpx; margin-top: {{marginTop}}rpx; margin-buttom: {{marginButtom}}rpx; background: {{background}};" bindtap="tap">
+    <text>{{text}}</text>
+</view>

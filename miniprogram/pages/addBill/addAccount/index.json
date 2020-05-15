@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "confirmButton": "/components/button/confirmButton/index"
+    },
+    "navigationBarTitleText": "添加账户"
+}

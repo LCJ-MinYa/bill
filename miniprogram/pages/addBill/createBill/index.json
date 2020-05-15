@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "confirmButton": "/components/button/confirmButton/index"
+    },
+    "navigationBarTitleText": "填写详细信息"
+}

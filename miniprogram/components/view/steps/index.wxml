@@ -1,0 +1,7 @@
+<view class="step-box">
+    <view class="step-item" wx:for="{{list}}" wx:key="key" wx:for-index="index" wx:for-item="item">
+        <view class="step-strip {{item.active ? 'active' : ''}}"></view>
+        <view class="step-index {{item.active ? 'active' : ''}}">{{index + 1}}</view>
+        <view class="step-name {{item.active ? 'text-active' : ''}}">{{item.name}}</view>
+    </view>
+</view>
