@@ -1,3 +1,35 @@
+function doUploadFile(url) {
+    return new Promise((resolve, reject) => {
+        wx.chooseImage({
+            count: 1,
+            sizeType: ['original', 'compressed'],
+            sourceType: ['album', 'camera'],
+            success: (res => {
+                wx.showLoading({
+                    title: '加载中...',
+                });
+                const filePath = res.tempFilePaths[0];
+                var timestamp = Date.parse(new Date());
+                const cloudPath = url + '/' + timestamp + filePath.match(/\.[^.]+?$/)[0]
+                wx.cloud.uploadFile({
+                    cloudPath,
+                    filePath,
+                    success: result => {
+                        wx.hideLoading();
+                        resolve(result);
+                    },
+                    fail: error => {
+                        reject(error);
+                    }
+                })
+            }),
+            fail: err => {
+                reject(err);
+            }
+        })
+    });
+}
+
 function add(a, b) {
     var c, d, e;
     try {
@@ -57,5 +89,6 @@ export {
     add,
     sub,
     mul,
-    div
+    div,
+    doUploadFile
 }

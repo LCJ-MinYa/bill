@@ -29,10 +29,19 @@ Page({
         this.getUserAccountData();
     },
 
-    getUserAccountData(refresh) {
+    onPullDownRefresh: function () {
+        wx.showNavigationBarLoading();
+        this.getUserAccountData(true, true);
+    },
+
+    getUserAccountData(refresh, pullDownRefresh) {
         let payAccount = app.getPayAccount();
         if (refresh || !payAccount) {
             request('get_pay_account').then(result => {
+                if (pullDownRefresh) {
+                    wx.hideNavigationBarLoading();
+                    wx.stopPullDownRefresh();
+                }
                 if (result.data.length) {
                     wx.setStorageSync('payAccount', JSON.stringify(result.data));
                     this.setData({

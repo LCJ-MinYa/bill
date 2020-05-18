@@ -7,6 +7,7 @@ Page({
 
     onLoad() {
         this.updateUserInfo();
+        wx.showShareMenu();
     },
 
     updateUserInfo() {
@@ -113,5 +114,17 @@ Page({
 
     goAboutUs() {
         wx.navigateTo({ url: '/pages/mine/aboutUs/index' });
+    },
+
+    goFeedBack() {
+        wx.navigateTo({ url: '/pages/mine/feedBack/index' });
+    },
+
+    onShareAppMessage(res) {
+        return {
+            title: '分享你一个好用的记账小程序，快来试试吧~',
+            imageUrl: '../../../images/share-img.png',
+            path: '/pages/index/index'
+        }
     },
 })

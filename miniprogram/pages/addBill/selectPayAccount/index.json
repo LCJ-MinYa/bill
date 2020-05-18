@@ -3,5 +3,7 @@
         "steps": "/components/view/steps/index",
         "confirmButton": "/components/button/confirmButton/index"
     },
-    "navigationBarTitleText": "选择对方账户"
+    "navigationBarTitleText": "选择对方账户",
+    "enablePullDownRefresh": true,
+    "backgroundTextStyle": "dark"
 }

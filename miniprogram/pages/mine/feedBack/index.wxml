@@ -1,0 +1,18 @@
+<view class="container">
+    <view class="content-box">
+        <van-field value="{{ content }}" type="textarea" show-word-limit maxlength="500" placeholder="准备全面的描述有助于我们更快捷理解你的想法" bind:change="changeContent" />
+    </view>
+    <view class="upload-img-wrap">
+        <view class="upload-img-box">
+            <view class="upload-img-btn" hover-class="upload-img-btn-hover" hover-start-time="30" hover-stay-time="30" wx:if="{{!uploadFile}}" bindtap="clickToUploadFile">
+                <van-icon name="photo" size="60rpx" color="#999999" />
+                <view>照片</view>
+            </view>
+            <view class="upload-img-btn" wx:else>
+                <van-icon class="close-box" name="clear" size="40rpx" color="#999999" bindtap="clearUploadFile" />
+                <image mode="aspectFill" src="{{uploadFile}}" />
+            </view>
+        </view>
+    </view>
+    <confirmButton position="fixed" text="提交" bind:clickBtn="clickBtn" />
+</view>

@@ -8,7 +8,11 @@
         </button>
     </view>
     <view class="column-cross-flex-start">
-        <!-- <van-cell icon="other-pay" title="意见反馈" is-link /> -->
+        <van-cell icon="other-pay" bindtap="goFeedBack" title="意见反馈" is-link />
+        <button class="share-btn" open-type="share">
+            <van-cell icon="manager-o" border="{{false}}" title="分享朋友" is-link />
+        </button>
+        <view class="size-box"></view>
         <van-cell icon="info-o" bindtap="goAboutUs" title="关于我们" is-link />
     </view>
 </view>

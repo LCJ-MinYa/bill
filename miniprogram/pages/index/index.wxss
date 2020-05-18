@@ -27,12 +27,12 @@
     left: 0;
     right: 0;
     width: 100%;
-    height: 400rpx;
+    height: 300rpx;
     background: #C7143D;
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 50rpx 40rpx;
+    padding: 10rpx 40rpx 40rpx;
     z-index: 9;
 }
 
@@ -41,7 +41,7 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    height: 200rpx;
+    height: 150rpx;
     width: 100%;
     color: #fff;
 }
@@ -91,7 +91,7 @@
 }
 
 .bill-box {
-    margin-top: 400rpx;
+    margin-top: 300rpx;
     display: flex;
     width: 100%;
     align-items: center;

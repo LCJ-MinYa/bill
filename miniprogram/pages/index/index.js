@@ -92,10 +92,6 @@ Page({
     },
 
     goAddBook() {
-        if (app.getUserInfo()) {
-            wx.navigateTo({ url: '/pages/addBill/selectType/index' });
-        } else {
-            app.toast('请先登陆才能记账哦~');
-        }
+        wx.navigateTo({ url: '/pages/addBill/selectType/index' });
     }
 })

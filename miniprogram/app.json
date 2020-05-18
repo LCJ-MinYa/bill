@@ -2,6 +2,7 @@
     "pages": [
         "pages/index/index",
         "pages/mine/index/index",
+        "pages/mine/feedBack/index",
         "pages/mine/aboutUs/index",
         "pages/addBill/selectType/index",
         "pages/addBill/addAccount/index",

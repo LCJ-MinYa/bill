@@ -1,0 +1,6 @@
+{
+    "usingComponents": {
+        "confirmButton": "/components/button/confirmButton/index"
+    },
+    "navigationBarTitleText": "意见反馈"
+}

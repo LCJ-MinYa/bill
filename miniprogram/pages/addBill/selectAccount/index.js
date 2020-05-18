@@ -27,10 +27,19 @@ Page({
         this.getUserAccountData();
     },
 
-    getUserAccountData(refresh) {
+    onPullDownRefresh: function () {
+        wx.showNavigationBarLoading();
+        this.getUserAccountData(true, true);
+    },
+
+    getUserAccountData(refresh, pullDownRefresh) {
         let userAccount = app.getUserAccount();
         if (refresh || !userAccount) {
             request('get_user_account').then(result => {
+                if (pullDownRefresh) {
+                    wx.hideNavigationBarLoading();
+                    wx.stopPullDownRefresh();
+                }
                 if (result.data.length) {
                     wx.setStorageSync('userAccount', JSON.stringify(result.data));
                     this.setData({
