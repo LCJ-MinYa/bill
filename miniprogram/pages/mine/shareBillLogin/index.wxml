@@ -1,0 +1,13 @@
+<view class="container">
+    <van-cell-group>
+        <van-field value="{{ username }}" data-index="username" maxlength="{{20}}" clearable label="账号" placeholder="请输入账号" bind:change="changeValue" />
+    </van-cell-group>
+    <van-cell-group>
+        <van-field value="{{ password }}" data-index="password" password maxlength="{{20}}" clearable label="密码" placeholder="请输入密码" bind:change="changeValue" />
+    </van-cell-group>
+    <confirmButton text="登录" bind:clickBtn="clickBtn" />
+    <view class="action-box">
+        <view>忘记密码</view>
+        <view bindtap="goAddShareBillUser">注册账号</view>
+    </view>
+</view>

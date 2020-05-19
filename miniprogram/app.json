@@ -4,6 +4,8 @@
         "pages/mine/index/index",
         "pages/mine/feedBack/index",
         "pages/mine/aboutUs/index",
+        "pages/mine/addshareBillUser/index",
+        "pages/mine/shareBillLogin/index",
         "pages/addBill/selectType/index",
         "pages/addBill/addAccount/index",
         "pages/addBill/selectAccount/index",

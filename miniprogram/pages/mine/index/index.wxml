@@ -4,10 +4,12 @@
             <view class="header-img-box">
                 <image mode="aspectFill" src="{{userInfo.avatarUrl || '../../../images/mine/avatar.png'}}" />
             </view>
-            <view class="header-name">{{userInfo.nickName || '请登录'}}</view>
+            <view class="header-name">{{userInfo.nickName || '微信登录'}}</view>
         </button>
     </view>
     <view class="column-cross-flex-start">
+        <van-cell icon="balance-list-o" border="{{false}}" bindtap="goShareBillLogin" value="{{shareBillUser}}" title="共享账本" is-link />
+        <view class="size-box"></view>
         <van-cell icon="other-pay" bindtap="goFeedBack" title="意见反馈" is-link />
         <button class="share-btn" open-type="share">
             <van-cell icon="manager-o" border="{{false}}" title="分享朋友" is-link />

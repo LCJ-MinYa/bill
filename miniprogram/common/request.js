@@ -12,6 +12,13 @@ export default function (url, data = {}, handleErr, noLoading) {
                 if (!noLoading) {
                     wx.hideLoading();
                 }
+                if (res.result.code == -1) {
+                    wx.showToast({
+                        icon: 'none',
+                        title: res.result.message
+                    });
+                    return;
+                }
                 resolve(res.result);
             },
             fail: err => {
@@ -20,6 +27,11 @@ export default function (url, data = {}, handleErr, noLoading) {
                 }
                 if (handleErr) {
                     reject(err);
+                } else {
+                    wx.showToast({
+                        icon: 'none',
+                        title: err.toString()
+                    });
                 }
             }
         })

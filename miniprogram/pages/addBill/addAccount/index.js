@@ -71,12 +71,9 @@ Page({
         })
     },
 
-    changeAccountName(event) {
-        this.data.accountName = event.detail;
+    changeValue(event) {
+        const key = event.target.dataset.index;
+        this.data[key] = event.detail;
     },
-
-    changeAccountTypeDetail(event) {
-        this.data.accountTypeDetail = event.detail;
-    }
 
 })

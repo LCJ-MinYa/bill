@@ -36,6 +36,10 @@ App({
         }
     },
 
+    getShareBillUser() {
+        return wx.getStorageSync('shareBillUser');
+    },
+
     getUserAccount() {
         try {
             let userAccount = JSON.parse(wx.getStorageSync('userAccount'));

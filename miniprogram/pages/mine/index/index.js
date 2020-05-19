@@ -2,21 +2,26 @@ const app = getApp()
 
 Page({
     data: {
-        userInfo: null
+        userInfo: null,
+        shareBillUser: '暂无',
     },
 
     onLoad() {
         this.updateUserInfo();
-        wx.showShareMenu();
+        this.updateShareBillUser();
     },
 
     updateUserInfo() {
-        try {
-            let userInfo = JSON.parse(wx.getStorageSync('userInfo'));
-            this.setData({
-                userInfo: userInfo
-            })
-        } catch (err) { }
+        this.setData({
+            userInfo: app.getUserInfo()
+        })
+    },
+
+    updateShareBillUser() {
+        this.setData({
+            shareBillUser: app.getShareBillUser()
+        })
+        console.log(this.data);
     },
 
     getUserInfoFun() {
@@ -118,6 +123,14 @@ Page({
 
     goFeedBack() {
         wx.navigateTo({ url: '/pages/mine/feedBack/index' });
+    },
+
+    goShareBillLogin() {
+        if (!app.getUserInfo()) {
+            app.toast('请先微信登陆才能使用共享账本哦~');
+            return;
+        }
+        wx.navigateTo({ url: '/pages/mine/shareBillLogin/index' });
     },
 
     onShareAppMessage(res) {

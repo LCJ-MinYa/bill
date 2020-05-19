@@ -1,12 +1,12 @@
 <view class="container">
     <van-cell-group>
-        <van-field value="{{ accountName }}" maxlength="{{10}}" clearable label="账户名" placeholder="请输入账户名" bind:change="changeAccountName" />
+        <van-field value="{{ accountName }}" data-index="accountName" maxlength="{{10}}" clearable label="账户名" placeholder="请输入账户名" bind:change="changeValue" />
     </van-cell-group>
     <van-cell-group bindtap="toggleAccountType">
         <van-field value="{{ accountType.name }}" icon="arrow" disabled label="账户类型" placeholder="请选择账户类型" />
     </van-cell-group>
     <van-cell-group wx:if="{{accountType.id == 3 || accountType.id == 4}}">
-        <van-field value="{{ accountTypeDetail }}" maxlength="{{10}}" clearable label="银行名称" placeholder="请输入银行名称" bind:change="changeAccountTypeDetail" />
+        <van-field value="{{ accountTypeDetail }}" data-index="accountTypeDetail" maxlength="{{10}}" clearable label="银行名称" placeholder="请输入银行名称" bind:change="changeValue" />
     </van-cell-group>
     <confirmButton bind:clickBtn="clickBtn" />
     <van-action-sheet description="选择账户类型" show="{{ show }}" actions="{{ actions }}" bind:close="toggleAccountType" bind:select="selectAccountType" />

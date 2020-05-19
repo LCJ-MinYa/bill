@@ -1,12 +1,12 @@
 <view class="container">
     <van-cell-group>
-        <van-field value="{{ money }}" maxlength="{{10}}" type="digit" clearable label="金额" placeholder="请输入金额" bind:change="changeMoney" />
+        <van-field value="{{ money }}" data-index="money" maxlength="{{10}}" type="digit" clearable label="金额" placeholder="请输入金额" bind:change="changeValue" />
     </van-cell-group>
     <van-cell-group bindtap="toggleDate">
         <van-field value="{{ date.timeString }}" icon="arrow" disabled label="时间" placeholder="请选择时间" />
     </van-cell-group>
     <van-cell-group>
-        <van-field value="{{ comment }}" maxlength="{{20}}" clearable label="备注" placeholder="请输入备注" bind:change="changeComment" />
+        <van-field value="{{ comment }}" data-index="comment" maxlength="{{20}}" clearable label="备注" placeholder="请输入备注" bind:change="changeValue" />
     </van-cell-group>
     <confirmButton text="记一笔" bind:clickBtn="clickBtn" />
     <van-popup show="{{ showDate }}" bind:close="toggleDate" position="bottom">

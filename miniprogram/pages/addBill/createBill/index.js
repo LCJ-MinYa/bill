@@ -17,12 +17,9 @@ Page({
         payAccountId: 0,
     },
 
-    changeMoney(event) {
-        this.data.money = event.detail;
-    },
-
-    changeComment(event) {
-        this.data.comment = event.detail;
+    changeValue(event) {
+        const key = event.target.dataset.index;
+        this.data[key] = event.detail;
     },
 
     toggleDate() {
