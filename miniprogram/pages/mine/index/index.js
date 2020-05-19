@@ -1,6 +1,9 @@
-const app = getApp()
+const app = getApp();
+import create from '../../../common/create';
+import store from '../../../store/index';
 
-Page({
+create.Page(store, {
+    use: ['nums'],
     data: {
         userInfo: null,
         shareBillUser: '暂无',
@@ -21,10 +24,11 @@ Page({
         this.setData({
             shareBillUser: app.getShareBillUser()
         })
-        console.log(this.data);
     },
 
     getUserInfoFun() {
+        this.store.data.nums += 1;
+        console.log(this.store);
         if (this.data.userInfo) {
             return;
         }

@@ -1,4 +1,4 @@
-import request from './common/request';
+import store from './store/index';
 
 App({
     onLaunch: function () {
@@ -14,6 +14,8 @@ App({
                 traceUser: true,
             })
         }
+        store.data.nums += 1;
+        console.log(store);
     },
 
     globalData: {

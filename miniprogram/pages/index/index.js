@@ -1,8 +1,11 @@
 const app = getApp();
+import create from '../../common/create';
+import store from '../../store/index';
 import request from '../../common/request';
 import * as utils from '../../common/utils';
 
-Page({
+create.Page(store, {
+    use: ['nums'],
     data: {
         balance: 0,
         balanceTitle: '总结余',
