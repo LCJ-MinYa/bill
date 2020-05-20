@@ -8,6 +8,6 @@
     <confirmButton text="登录" bind:clickBtn="clickBtn" />
     <view class="action-box">
         <view>忘记密码</view>
-        <view bindtap="goAddShareBillUser">注册账号</view>
+        <view bindtap="goAddShareBillUser">注册账本</view>
     </view>
 </view>

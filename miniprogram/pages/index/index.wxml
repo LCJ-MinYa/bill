@@ -18,7 +18,6 @@
         </view>
     </view>
     <view class="bill-box">
-        <view>nums的值为：{{$.nums}}</view>
         <view class="bill-item-box" wx:for="{{billList}}" wx:key="key" wx:for-index="index" wx:for-item="item">
             <view class="bill-content-box">
                 <view class="bill-account-box">

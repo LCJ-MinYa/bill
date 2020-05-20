@@ -2,5 +2,5 @@
     "usingComponents": {
         "confirmButton": "/components/button/confirmButton/index"
     },
-    "navigationBarTitleText": "共享账本登录"
+    "navigationBarTitleText": "账本登录"
 }

@@ -1,7 +1,12 @@
 import store from './store/index';
 
 App({
-    onLaunch: function () {
+    onLaunch() {
+        this.wxCloudInit();
+        this.storeInit();
+    },
+
+    wxCloudInit() {
         if (!wx.cloud) {
             console.error('请使用 2.2.3 或以上的基础库以使用云能力')
         } else {
@@ -14,12 +19,10 @@ App({
                 traceUser: true,
             })
         }
-        store.data.nums += 1;
-        console.log(store);
     },
 
-    globalData: {
-        userInfo: null,
+    storeInit() {
+        store.data.userInfo = this.getUserInfo();
     },
 
     toast(message) {
@@ -36,10 +39,6 @@ App({
         } catch (err) {
             return null;
         }
-    },
-
-    getShareBillUser() {
-        return wx.getStorageSync('shareBillUser');
     },
 
     getUserAccount() {

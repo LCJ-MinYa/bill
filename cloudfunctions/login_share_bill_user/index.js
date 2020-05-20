@@ -5,6 +5,7 @@ cloud.init({
 });
 
 const db = cloud.database();
+const _ = db.command;
 
 //判断当前账号是否存在
 async function judgeExists(event) {
@@ -21,11 +22,19 @@ exports.main = async (event, context) => {
     if (judgeResult.data.length > 0) {
         return await db.collection('user')
             .where({
-                _openid: event.userInfo.openId
+                openid: event.userInfo.openId,
+                shareBillList: _.not(_.all([
+                    _.elemMatch({
+                        username: event.username
+                    })
+                ]))
             })
             .update({
                 data: {
-                    shareBillUser: event.username
+                    shareBillList: _.push({
+                        billname: judgeResult.data[0].billname,
+                        username: event.username,
+                    })
                 }
             })
     } else {

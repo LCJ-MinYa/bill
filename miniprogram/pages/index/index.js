@@ -5,7 +5,7 @@ import request from '../../common/request';
 import * as utils from '../../common/utils';
 
 create.Page(store, {
-    use: ['nums'],
+    use: ['shareBillList'],
     data: {
         balance: 0,
         balanceTitle: '总结余',

@@ -23,23 +23,15 @@ exports.main = async (event, context) => {
             message: '账号已存在!'
         }
     } else {
-        await db.collection('shareBillUser').add({
+        return await db.collection('shareBillUser').add({
             data: {
+                billname: event.billname,
                 username: event.username,
                 password: event.password,
                 createTime: db.serverDate(),
                 openid: event.userInfo.openId
             }
         });
-        return await db.collection('user')
-            .where({
-                _openid: event.userInfo.openId
-            })
-            .update({
-                data: {
-                    shareBillUser: event.username
-                }
-            })
     }
 }
 

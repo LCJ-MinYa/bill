@@ -29,11 +29,10 @@ Page({
             password: this.data.password
         }).then(result => {
             if (result.stats.updated) {
-                wx.setStorageSync('shareBillUser', this.data.username);
-                let pages = getCurrentPages();
-                let lastPage = pages[pages.length - 2];
-                lastPage.updateShareBillUser && lastPage.updateShareBillUser();
                 wx.navigateBack();
+                app.toast('添加账本成功');
+            } else {
+                app.toast('请勿重复已存在账本');
             }
         })
     },

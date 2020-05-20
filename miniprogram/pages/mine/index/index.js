@@ -1,35 +1,17 @@
 const app = getApp();
 import create from '../../../common/create';
 import store from '../../../store/index';
+import request from '../../../common/request';
 
 create.Page(store, {
-    use: ['nums'],
-    data: {
-        userInfo: null,
-        shareBillUser: '暂无',
-    },
+    use: ['userInfo'],
 
     onLoad() {
-        this.updateUserInfo();
-        this.updateShareBillUser();
-    },
 
-    updateUserInfo() {
-        this.setData({
-            userInfo: app.getUserInfo()
-        })
-    },
-
-    updateShareBillUser() {
-        this.setData({
-            shareBillUser: app.getShareBillUser()
-        })
     },
 
     getUserInfoFun() {
-        this.store.data.nums += 1;
-        console.log(this.store);
-        if (this.data.userInfo) {
+        if (this.store.data.userInfo) {
             return;
         }
         wx.getUserInfo({
@@ -74,10 +56,6 @@ create.Page(store, {
         this.getOpenid().then(res => {
             userInfo.openid = res.result.openid;
             this.onAddUser(userInfo);
-
-            wx.setStorageSync('userInfo', JSON.stringify(userInfo));
-            this.updateUserInfo();
-            app.toast('登陆成功~');
         })
     },
 
@@ -97,27 +75,10 @@ create.Page(store, {
     },
 
     onAddUser(userInfo) {
-        const db = wx.cloud.database();
-        db.collection('user').where({
-            _openid: userInfo.openid
-        }).get({
-            success: res => {
-                if (res.data.length) {
-                    console.log('用户信息已经存储，不需要再存储数据库');
-                } else {
-                    db.collection('user').add({
-                        data: {
-                            userInfo
-                        },
-                        success: res => {
-                            console.log(res);
-                        },
-                        fail: err => {
-                            console.log(err);
-                        }
-                    })
-                }
-            }
+        request('add_user', userInfo).then(result => {
+            app.toast('登陆成功~');
+            wx.setStorageSync('userInfo', JSON.stringify(userInfo));
+            this.store.data.userInfo = userInfo;
         });
     },
 
@@ -130,7 +91,7 @@ create.Page(store, {
     },
 
     goShareBillLogin() {
-        if (!app.getUserInfo()) {
+        if (!this.store.data.userInfo) {
             app.toast('请先微信登陆才能使用共享账本哦~');
             return;
         }

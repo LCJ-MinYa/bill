@@ -3,12 +3,17 @@ import request from '../../../common/request';
 
 Page({
     data: {
+        billname: '',
         username: '',
         password: '',
         confirmPassword: '',
     },
 
     clickBtn() {
+        if (!this.data.billname) {
+            app.toast('请输入账本名称');
+            return;
+        }
         if (!this.data.username) {
             app.toast('请输入账号');
             return;
@@ -30,16 +35,12 @@ Page({
             return;
         }
         request('add_share_bill_user', {
+            billname: this.data.billname,
             username: this.data.username,
             password: this.data.password
         }).then(result => {
-            if (result.stats.updated) {
-                wx.setStorageSync('shareBillUser', this.data.username);
-                let pages = getCurrentPages();
-                let lastPage = pages[pages.length - 3];
-                lastPage.updateShareBillUser && lastPage.updateShareBillUser();
-                wx.navigateBack({ delta: 2 });
-            }
+            wx.navigateBack({ delta: 2 });
+            app.toast('注册账本成功');
         })
     },
 

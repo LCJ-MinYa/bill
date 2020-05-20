@@ -1,5 +1,8 @@
 <view class="container">
     <van-cell-group>
+        <van-field value="{{ billname }}" data-index="billname" maxlength="{{20}}" clearable label="账本名称" placeholder="请输入账本名称" bind:change="changeValue" />
+    </van-cell-group>
+    <van-cell-group>
         <van-field value="{{ username }}" data-index="username" maxlength="{{20}}" clearable label="账号" placeholder="请输入账号" bind:change="changeValue" />
     </van-cell-group>
     <van-cell-group>
