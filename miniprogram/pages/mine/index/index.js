@@ -98,6 +98,10 @@ create.Page(store, {
         wx.navigateTo({ url: '/pages/mine/shareBillLogin/index' });
     },
 
+    goShareBillList() {
+        wx.navigateTo({ url: '/pages/mine/shareBillList/index' });
+    },
+
     onShareAppMessage(res) {
         return {
             title: '分享你一个好用的记账小程序，快来试试吧~',

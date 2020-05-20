@@ -5,7 +5,10 @@ import request from '../../common/request';
 import * as utils from '../../common/utils';
 
 create.Page(store, {
-    use: ['shareBillList'],
+    use: [
+        'selectBill',
+        'shareBillList'
+    ],
     data: {
         balance: 0,
         balanceTitle: '总结余',
@@ -17,10 +20,22 @@ create.Page(store, {
     },
 
     onLoad() {
+        store.onChange(this.watchStore);
         this.getBillData();
     },
 
-    onPullDownRefresh: function () {
+    onUnload() {
+        store.offChange(this.watchStore);
+    },
+
+    watchStore(evt) {
+        if (evt.hasOwnProperty('selectBill')) {
+            console.log(11);
+            this.getBillData(true);
+        }
+    },
+
+    onPullDownRefresh() {
         wx.showNavigationBarLoading();
         this.getBillData(true);
     },
@@ -89,6 +104,13 @@ create.Page(store, {
                         expense: expense,
                         balance: utils.sub(income, expense)
                     })
+                })
+            } else {
+                this.setData({
+                    billList: result.data,
+                    income: 0,
+                    expense: 0,
+                    balance: 0
                 })
             }
         })

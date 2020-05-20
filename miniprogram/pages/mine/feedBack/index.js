@@ -25,10 +25,8 @@ Page({
             content: this.data.content,
             fileID: this.data.uploadFile
         }).then(result => {
+            wx.navigateBack();
             app.toast('添加意见反馈成功，我们会耐心听取的哦~');
-            setTimeout(() => {
-                wx.navigateBack();
-            }, 1000);
         })
     },
 

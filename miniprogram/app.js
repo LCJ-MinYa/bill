@@ -1,4 +1,5 @@
 import store from './store/index';
+import request from './common/request';
 
 App({
     onLaunch() {
@@ -23,6 +24,8 @@ App({
 
     storeInit() {
         store.data.userInfo = this.getUserInfo();
+        store.data.selectBill = this.getSelectBill();
+        this.getShareBillList();
     },
 
     toast(message) {
@@ -41,6 +44,11 @@ App({
         }
     },
 
+    getSelectBill() {
+        let selectBill = wx.getStorageSync('selectBill') || 'wx';
+        return selectBill;
+    },
+
     getUserAccount() {
         try {
             let userAccount = JSON.parse(wx.getStorageSync('userAccount'));
@@ -57,5 +65,16 @@ App({
         } catch (err) {
             return null;
         }
+    },
+
+    getShareBillList() {
+        request('get_share_bill_list', {}, false, true).then(result => {
+            console.log(result);
+            result.unshift({
+                billname: '微信账本',
+                username: 'wx',
+            })
+            store.data.shareBillList = result;
+        });
     }
 })

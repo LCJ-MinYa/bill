@@ -29,10 +29,11 @@ Page({
             password: this.data.password
         }).then(result => {
             if (result.stats.updated) {
+                app.getShareBillList();
                 wx.navigateBack();
                 app.toast('添加账本成功');
             } else {
-                app.toast('请勿重复已存在账本');
+                app.toast('请勿重复添加已存在账本');
             }
         })
     },

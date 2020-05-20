@@ -1,0 +1,7 @@
+<view class="container">
+    <block wx:for="{{shareBillList}}" wx:key="key" wx:for-index="index" wx:for-item="item">
+        <van-cell data-index="{{item.username}}" bindtap="doSelectBill" icon="bill-o" title="{{item.billname}}" is-link>
+            <van-tag wx:if="{{selectBill == item.username}}" round type="success">当前账本</van-tag>
+        </van-cell>
+    </block>
+</view>

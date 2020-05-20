@@ -1,9 +1,14 @@
+import store from '../store/index';
+
 export default function (url, data = {}, handleErr, noLoading) {
     let promise = new Promise((resolve, reject) => {
         if (!noLoading) {
             wx.showLoading({
                 title: '加载中...',
             });
+        }
+        if (store.data.selectBill != 'wx') {
+            data.username = store.data.selectBill;
         }
         wx.cloud.callFunction({
             name: url,

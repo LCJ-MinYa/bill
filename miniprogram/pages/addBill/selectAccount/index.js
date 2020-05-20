@@ -27,7 +27,7 @@ Page({
         this.getUserAccountData();
     },
 
-    onPullDownRefresh: function () {
+    onPullDownRefresh() {
         wx.showNavigationBarLoading();
         this.getUserAccountData(true, true);
     },

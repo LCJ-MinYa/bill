@@ -131,7 +131,8 @@ page {
 steps,
 confirmButton,
 van-cell-group,
-van-cell {
+van-cell,
+van-swipe-cell {
     width: 100%;
 }
 

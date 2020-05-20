@@ -23,11 +23,11 @@ exports.main = async (event, context) => {
         return await db.collection('user')
             .where({
                 openid: event.userInfo.openId,
-                shareBillList: _.not(_.all([
+                shareBillList: _.not(
                     _.elemMatch({
-                        username: event.username
+                        username: _.eq(event.username)
                     })
-                ]))
+                )
             })
             .update({
                 data: {

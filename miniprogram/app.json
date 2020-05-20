@@ -6,6 +6,7 @@
         "pages/mine/aboutUs/index",
         "pages/mine/addshareBillUser/index",
         "pages/mine/shareBillLogin/index",
+        "pages/mine/shareBillList/index",
         "pages/addBill/selectType/index",
         "pages/addBill/addAccount/index",
         "pages/addBill/selectAccount/index",
@@ -45,7 +46,8 @@
         "van-loading": "@vant/weapp/loading/index",
         "van-action-sheet": "@vant/weapp/action-sheet/index",
         "van-popup": "@vant/weapp/popup/index",
-        "van-datetime-picker": "@vant/weapp/datetime-picker/index"
+        "van-datetime-picker": "@vant/weapp/datetime-picker/index",
+        "van-tag": "@vant/weapp/tag/index"
     },
     "sitemapLocation": "sitemap.json"
 }

@@ -8,6 +8,7 @@
         </button>
     </view>
     <view class="column-cross-flex-start">
+        <van-cell icon="todo-list-o" bindtap="goShareBillList" title="账本列表" is-link />
         <van-cell icon="balance-list-o" border="{{false}}" bindtap="goShareBillLogin" title="添加账本" is-link />
         <view class="size-box"></view>
         <van-cell icon="other-pay" bindtap="goFeedBack" title="意见反馈" is-link />
