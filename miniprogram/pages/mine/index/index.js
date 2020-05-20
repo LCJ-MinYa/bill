@@ -99,6 +99,10 @@ create.Page(store, {
     },
 
     goShareBillList() {
+        if (!this.store.data.userInfo) {
+            app.toast('请先微信登陆才能使用共享账本哦~');
+            return;
+        }
         wx.navigateTo({ url: '/pages/mine/shareBillList/index' });
     },
 

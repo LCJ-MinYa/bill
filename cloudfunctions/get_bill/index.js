@@ -26,8 +26,8 @@ async function getList(whereObj, skip) {
 
 exports.main = async (event, context) => {
     let whereObj = {};
-    if (event.username) {
-        whereObj.username = event.username;
+    if (event.selectBill) {
+        whereObj.selectBill = event.selectBill;
     } else {
         whereObj.openid = event.userInfo.openId;
     }

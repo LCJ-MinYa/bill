@@ -8,7 +8,7 @@ export default function (url, data = {}, handleErr, noLoading) {
             });
         }
         if (store.data.selectBill != 'wx') {
-            data.username = store.data.selectBill;
+            data.selectBill = store.data.selectBill;
         }
         wx.cloud.callFunction({
             name: url,
