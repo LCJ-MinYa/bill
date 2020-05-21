@@ -5,13 +5,20 @@ cloud.init({
 });
 
 const db = cloud.database();
+const _ = db.command;
 
 exports.main = async (event, context) => {
+    let whereObj = {};
+    if (event.selectBill) {
+        whereObj.selectBill = event.selectBill;
+    } else {
+        whereObj.openid = event.userInfo.openId;
+        whereObj.selectBill = _.exists(false);
+    }
+
     return await db.collection('payAccount')
         .orderBy('createTime', 'desc')
-        .where({
-            openid: event.userInfo.openId
-        })
+        .where(whereObj)
         .get()
 }
 

@@ -1,7 +1,12 @@
 const app = getApp()
 import request from '../../../common/request';
+import create from '../../../common/create';
+import store from '../../../store/index';
 
-Page({
+create.Page(store, {
+    use: [
+        'userAccount'
+    ],
     data: {
         stepsList: [{
             name: '选择记账类型',
@@ -16,7 +21,6 @@ Page({
             name: '填写详细信息',
             active: false
         }],
-        accountList: [],
         typeId: 0
     },
 
@@ -24,7 +28,6 @@ Page({
         if (options.typeId) {
             this.data.typeId = options.typeId;
         }
-        this.getUserAccountData();
     },
 
     onPullDownRefresh() {
@@ -33,23 +36,15 @@ Page({
     },
 
     getUserAccountData(refresh, pullDownRefresh) {
-        let userAccount = app.getUserAccount();
-        if (refresh || !userAccount) {
+        if (refresh) {
             request('get_user_account').then(result => {
                 if (pullDownRefresh) {
                     wx.hideNavigationBarLoading();
                     wx.stopPullDownRefresh();
                 }
                 if (result.data.length) {
-                    wx.setStorageSync('userAccount', JSON.stringify(result.data));
-                    this.setData({
-                        accountList: result.data
-                    })
+                    this.store.data.userAccount = result.data;
                 }
-            })
-        } else {
-            this.setData({
-                accountList: userAccount
             })
         }
     },

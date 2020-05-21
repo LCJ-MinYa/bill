@@ -49,27 +49,8 @@ App({
         return selectBill;
     },
 
-    getUserAccount() {
-        try {
-            let userAccount = JSON.parse(wx.getStorageSync('userAccount'));
-            return userAccount;
-        } catch (err) {
-            return null;
-        }
-    },
-
-    getPayAccount() {
-        try {
-            let payAccount = JSON.parse(wx.getStorageSync('payAccount'));
-            return payAccount;
-        } catch (err) {
-            return null;
-        }
-    },
-
     getShareBillList() {
         request('get_share_bill_list', {}, false, true).then(result => {
-            console.log(result);
             result.unshift({
                 billname: '微信账本',
                 username: 'wx',

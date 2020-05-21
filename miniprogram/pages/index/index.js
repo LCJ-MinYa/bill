@@ -7,7 +7,9 @@ import * as utils from '../../common/utils';
 create.Page(store, {
     use: [
         'selectBill',
-        'shareBillList'
+        'shareBillList',
+        'userAccount',
+        'payAccount'
     ],
     data: {
         balance: 0,
@@ -30,7 +32,6 @@ create.Page(store, {
 
     watchStore(evt) {
         if (evt.hasOwnProperty('selectBill')) {
-            console.log(11);
             this.getBillData(true);
         }
     },
@@ -43,76 +44,54 @@ create.Page(store, {
     getAllAccountData() {
         return new Promise((resolve, reject) => {
             let PromiseAllArr = [];
-            const userAccount = app.getUserAccount();
-            const payAccount = app.getPayAccount();
-            if (!userAccount || !payAccount) {
-                PromiseAllArr = [request('get_user_account', {}, false, true), request('get_pay_account', {}, false, true)];
-                Promise.all(PromiseAllArr).then(result => {
-                    if (result[0].data.length) {
-                        wx.setStorageSync('userAccount', JSON.stringify(result[0].data));
-                    }
-                    if (result[1].data.length) {
-                        wx.setStorageSync('payAccount', JSON.stringify(result[1].data));
-                    }
-                    resolve(true);
-                }).catch(err => {
-                    reject(err);
-                })
-            } else {
+            PromiseAllArr = [request('get_user_account', {}, false, true), request('get_pay_account', {}, false, true)];
+            Promise.all(PromiseAllArr).then(result => {
+                this.store.data.userAccount = result[0].data;
+                this.store.data.payAccount = result[1].data;
+                console.log(this.store.data);
                 resolve(true);
-            }
+            }).catch(err => {
+                reject(err);
+            })
         })
     },
 
     getBillData(pullDownRefresh) {
+        console.log('重新请求');
         request('get_bill').then(result => {
             if (pullDownRefresh) {
                 wx.hideNavigationBarLoading();
                 wx.stopPullDownRefresh();
             }
-            if (result.data.length) {
-                this.getAllAccountData().then(data => {
-                    let income = 0, expense = 0;
-                    const userAccount = app.getUserAccount();
-                    const payAccount = app.getPayAccount();
-                    for (let i = 0; i < result.data.length; i++) {
-                        if (result.data[i].typeId == 1) {
-                            income = utils.add(income, result.data[i].money);
-                        } else {
-                            expense = utils.add(expense, result.data[i].money);
-                        }
-                        if (userAccount && userAccount.length) {
-                            for (let j = 0; j < userAccount.length; j++) {
-                                if (result.data[i].userAccountId == userAccount[j]._id) {
-                                    result.data[i].userAccount = userAccount[j];
-                                    break;
-                                }
-                            }
-                        }
-                        if (payAccount && payAccount.length) {
-                            for (let j = 0; j < payAccount.length; j++) {
-                                if (result.data[i].payAccountId == payAccount[j]._id) {
-                                    result.data[i].payAccount = payAccount[j];
-                                    break;
-                                }
-                            }
+            //获取我的账户，对方账户列表
+            this.getAllAccountData().then(data => {
+                let income = 0, expense = 0;
+                for (let i = 0; i < result.data.length; i++) {
+                    if (result.data[i].typeId == 1) {
+                        income = utils.add(income, result.data[i].money);
+                    } else {
+                        expense = utils.add(expense, result.data[i].money);
+                    }
+                    for (let j = 0; j < this.store.data.userAccount.length; j++) {
+                        if (result.data[i].userAccountId == this.store.data.userAccount[j]._id) {
+                            result.data[i].userAccount = this.store.data.userAccount[j];
+                            break;
                         }
                     }
-                    this.setData({
-                        billList: result.data,
-                        income: income,
-                        expense: expense,
-                        balance: utils.sub(income, expense)
-                    })
-                })
-            } else {
+                    for (let j = 0; j < this.store.data.payAccount.length; j++) {
+                        if (result.data[i].payAccountId == this.store.data.payAccount[j]._id) {
+                            result.data[i].payAccount = this.store.data.payAccount[j];
+                            break;
+                        }
+                    }
+                }
                 this.setData({
                     billList: result.data,
-                    income: 0,
-                    expense: 0,
-                    balance: 0
+                    income: income,
+                    expense: expense,
+                    balance: utils.sub(income, expense)
                 })
-            }
+            })
         })
     },
 

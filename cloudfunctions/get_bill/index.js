@@ -5,6 +5,7 @@ cloud.init({
 });
 
 const db = cloud.database();
+const _ = db.command;
 
 //获取数据总数
 async function getCount(whereObj) {
@@ -30,6 +31,7 @@ exports.main = async (event, context) => {
         whereObj.selectBill = event.selectBill;
     } else {
         whereObj.openid = event.userInfo.openId;
+        whereObj.selectBill = _.exists(false);
     }
 
     let count = await getCount(whereObj);

@@ -1,7 +1,7 @@
 <view class="container">
     <steps list="{{stepsList}}" />
-    <view class="account-list-box" wx:if="{{accountList.length > 0}}">
-        <view class="account-item-box" wx:for="{{accountList}}" wx:key="key" wx:for-index="index" wx:for-item="item" data-index="{{item._id}}" bindtap="goSelectPayAccount">
+    <view class="account-list-box" wx:if="{{$.userAccount.length > 0}}">
+        <view class="account-item-box" wx:for="{{$.userAccount}}" wx:key="key" wx:for-index="index" wx:for-item="item" data-index="{{item._id}}" bindtap="goSelectPayAccount">
             <view class="account-left-box">
                 <view wx:if="{{item.accountType.id == 1}}" class="iconfont icon-weixinzhifu"></view>
                 <view wx:elif="{{item.accountType.id == 2}}" class="iconfont icon-zhifubao"></view>
