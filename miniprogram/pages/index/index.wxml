@@ -18,7 +18,7 @@
         </view>
     </view>
     <view class="bill-box" wx:if="{{billList.length > 0}}">
-        <view class="bill-item-box" wx:for="{{billList}}" wx:key="key" wx:for-index="index" wx:for-item="item">
+        <view class="bill-item-box" wx:for="{{billList}}" wx:key="key" wx:for-index="index" wx:for-item="item" data-index="{{item}}" bindtap="deleteBillItem">
             <view class="bill-content-box">
                 <view class="bill-account-box">
                     <view class="account-item-box">
@@ -61,4 +61,5 @@
     <button class="add-btn" hover-class="add-btn-hover" bindtap="goAddBook">
         <van-icon name="plus" color="#fff" size="50rpx" />
     </button>
+    <van-dialog id="van-dialog" />
 </view>

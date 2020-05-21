@@ -47,7 +47,8 @@
         "van-action-sheet": "@vant/weapp/action-sheet/index",
         "van-popup": "@vant/weapp/popup/index",
         "van-datetime-picker": "@vant/weapp/datetime-picker/index",
-        "van-tag": "@vant/weapp/tag/index"
+        "van-tag": "@vant/weapp/tag/index",
+        "van-dialog": "@vant/weapp/dialog/index"
     },
     "sitemapLocation": "sitemap.json"
 }
