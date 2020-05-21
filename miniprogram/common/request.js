@@ -17,7 +17,7 @@ export default function (url, data = {}, handleErr, noLoading) {
                 if (!noLoading) {
                     wx.hideLoading();
                 }
-                if (res.result.code == -1) {
+                if (res.result && res.result.hasOwnProperty('code') && res.result.code == -1) {
                     wx.showToast({
                         icon: 'none',
                         title: res.result.message

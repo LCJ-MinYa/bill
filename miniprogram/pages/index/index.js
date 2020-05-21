@@ -48,7 +48,6 @@ create.Page(store, {
             Promise.all(PromiseAllArr).then(result => {
                 this.store.data.userAccount = result[0].data;
                 this.store.data.payAccount = result[1].data;
-                console.log(this.store.data);
                 resolve(true);
             }).catch(err => {
                 reject(err);
@@ -57,7 +56,6 @@ create.Page(store, {
     },
 
     getBillData(pullDownRefresh) {
-        console.log('重新请求');
         request('get_bill').then(result => {
             if (pullDownRefresh) {
                 wx.hideNavigationBarLoading();

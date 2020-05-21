@@ -12,9 +12,10 @@ exports.main = async (event, context) => {
             openid: event.userInfo.openId
         })
         .get()
-    if (result.data[0].hasOwnProperty('shareBillList')) {
-        return result.data[0].shareBillList;
-    } else {
+    try {
+        let list = result.data[0].shareBillList;
+        return list || [];
+    } catch (e) {
         return [];
     }
 }

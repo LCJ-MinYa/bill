@@ -56,6 +56,6 @@ App({
                 username: 'wx',
             })
             store.data.shareBillList = result;
-        });
+        })
     }
 })
