@@ -58,7 +58,6 @@ create.Page(store, {
     },
 
     getBillData(pullDownRefresh, noUpdateAccount) {
-        console.log(12);
         wx.showLoading({
             title: '加载中...',
         });
