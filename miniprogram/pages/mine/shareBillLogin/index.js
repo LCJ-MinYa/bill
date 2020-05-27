@@ -44,6 +44,8 @@ Page({
     },
 
     goAddShareBillUser() {
-        wx.navigateTo({ url: '/pages/mine/addshareBillUser/index' });
+        wx.navigateTo({
+            url: '/pages/mine/addshareBillUser/index'
+        });
     }
 })

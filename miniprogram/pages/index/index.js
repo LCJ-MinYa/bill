@@ -10,7 +10,8 @@ create.Page(store, {
         'selectBill',
         'shareBillList',
         'userAccount',
-        'payAccount'
+        'payAccount',
+        'userInfo'
     ],
     data: {
         balance: 0,
@@ -57,7 +58,11 @@ create.Page(store, {
     },
 
     getBillData(pullDownRefresh, noUpdateAccount) {
-        request('get_bill').then(result => {
+        console.log(12);
+        wx.showLoading({
+            title: '加载中...',
+        });
+        request('get_bill', {}, false, true).then(result => {
             if (pullDownRefresh) {
                 wx.hideNavigationBarLoading();
                 wx.stopPullDownRefresh();
@@ -74,7 +79,8 @@ create.Page(store, {
     },
 
     dealBillData(result) {
-        let income = 0, expense = 0;
+        let income = 0,
+            expense = 0;
         for (let i = 0; i < result.data.length; i++) {
             if (result.data[i].typeId == 1) {
                 income = utils.add(income, result.data[i].money);
@@ -99,16 +105,16 @@ create.Page(store, {
             income: income,
             expense: expense,
             balance: utils.sub(income, expense)
-        })
+        });
+        wx.hideLoading();
     },
 
     deleteBillItem(event) {
         let itemData = event.currentTarget.dataset.index;
-        console.log(event);
         Dialog.confirm({
-            title: '删除账单',
-            message: '您确认删除这笔' + (itemData.typeId == 2 ? '-' : '') + Number(itemData.money).toFixed(2) + '账单吗？',
-        })
+                title: '删除账单',
+                message: '您确认删除这笔' + (itemData.typeId == 2 ? '-' : '') + Number(itemData.money).toFixed(2) + '账单吗？',
+            })
             .then(() => {
                 request('delete_bill', {
                     _id: itemData._id
@@ -121,10 +127,32 @@ create.Page(store, {
                     }
                 })
             })
-            .catch(() => { })
+            .catch(() => {})
+    },
+
+    goShareBillLogin() {
+        if (!this.store.data.userInfo) {
+            app.toast('请先微信登陆才能使用共享账本哦~');
+            return;
+        }
+        wx.navigateTo({
+            url: '/pages/mine/shareBillLogin/index'
+        });
+    },
+
+    goShareBillList() {
+        if (!this.store.data.userInfo) {
+            app.toast('请先微信登陆才能使用共享账本哦~');
+            return;
+        }
+        wx.navigateTo({
+            url: '/pages/mine/shareBillList/index'
+        });
     },
 
     goAddBook() {
-        wx.navigateTo({ url: '/pages/addBill/selectType/index' });
+        wx.navigateTo({
+            url: '/pages/addBill/selectType/index'
+        });
     }
 })

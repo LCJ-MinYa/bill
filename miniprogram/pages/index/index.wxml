@@ -5,6 +5,8 @@
         <view class="balance-box">
             <view class="price">{{price.toFixed(balance)}}</view>
             <view class="title">{{balanceTitle}}</view>
+            <van-icon name="todo-list-o" color="white" size="40rpx" class="action-btn bill-list-btn" bindtap="goShareBillList" />
+            <van-icon name="add-o" color="white" size="40rpx" class="action-btn add-bill-btn" bindtap="goShareBillLogin" />
         </view>
         <view class="income-expense-box">
             <view>

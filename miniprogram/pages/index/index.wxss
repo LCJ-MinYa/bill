@@ -46,6 +46,20 @@
     color: #fff;
 }
 
+.action-btn {
+    position: absolute;
+    top: 0rpx;
+    padding: 20rpx;
+}
+
+.bill-list-btn {
+    left: 20rpx;
+}
+
+.add-bill-btn {
+    right: 20rpx;
+}
+
 .balance-box>.price {
     font-size: 60rpx;
     line-height: 1;

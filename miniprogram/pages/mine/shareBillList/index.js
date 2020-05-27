@@ -13,9 +13,8 @@ create.Page(store, {
             app.toast('当前账本已选中了哦~');
             return;
         }
-        wx.setStorageSync('selectBill', event.target.dataset.index);
-        this.store.data.selectBill = event.target.dataset.index;
         wx.navigateBack();
-        app.toast('切换账本成功');
+        this.store.data.selectBill = event.target.dataset.index;
+        wx.setStorageSync('selectBill', event.target.dataset.index);
     },
 })
