@@ -20,7 +20,10 @@ create.Page(store, {
         incomeTitle: '总收入',
         expense: 0,
         expenseTitle: '总支出',
-        billList: []
+        billList: [],
+        pageIndex: 1,
+        pageSize: 20,
+        hasMore: false
     },
 
     onLoad() {
@@ -43,6 +46,13 @@ create.Page(store, {
         this.getBillData(true);
     },
 
+    onReachBottom() {
+        if (!this.data.hasMore) {
+            return;
+        }
+        this.getBillData(false, true);
+    },
+
     getAllAccountData() {
         return new Promise((resolve, reject) => {
             let PromiseAllArr = [];
@@ -61,31 +71,27 @@ create.Page(store, {
         wx.showLoading({
             title: '加载中...',
         });
-        request('get_bill', {}, false, true).then(result => {
+        request('get_bill', {
+            pageSize: this.data.pageSize,
+            pageIndex: this.data.pageIndex
+        }, false, true).then(result => {
             if (pullDownRefresh) {
                 wx.hideNavigationBarLoading();
                 wx.stopPullDownRefresh();
             }
             if (noUpdateAccount) {
-                this.dealBillData(result);
+                this.dealBillData(result, pullDownRefresh);
             } else {
                 //获取我的账户，对方账户列表
                 this.getAllAccountData().then(data => {
-                    this.dealBillData(result);
+                    this.dealBillData(result, pullDownRefresh);
                 })
             }
         })
     },
 
-    dealBillData(result) {
-        let income = 0,
-            expense = 0;
+    dealBillData(result, pullDownRefresh) {
         for (let i = 0; i < result.data.length; i++) {
-            if (result.data[i].typeId == 1) {
-                income = utils.add(income, result.data[i].money);
-            } else {
-                expense = utils.add(expense, result.data[i].money);
-            }
             for (let j = 0; j < this.store.data.userAccount.length; j++) {
                 if (result.data[i].userAccountId == this.store.data.userAccount[j]._id) {
                     result.data[i].userAccount = this.store.data.userAccount[j];
@@ -99,11 +105,20 @@ create.Page(store, {
                 }
             }
         }
+        if (pullDownRefresh) {
+            this.data.pageIndex = 1;
+            this.data.billList = result.data;
+        } else {
+            this.data.pageIndex++;
+            this.data.billList = this.data.billList.concat(result.data);
+        }
         this.setData({
-            billList: result.data,
-            income: income,
-            expense: expense,
-            balance: utils.sub(income, expense)
+            pageIndex: this.data.pageIndex,
+            hasMore: result.hasMore,
+            billList: this.data.billList,
+            income: result.income,
+            expense: result.expense,
+            balance: utils.sub(result.income, result.expense)
         });
         wx.hideLoading();
     },
@@ -111,22 +126,20 @@ create.Page(store, {
     deleteBillItem(event) {
         let itemData = event.currentTarget.dataset.index;
         Dialog.confirm({
-                title: '删除账单',
-                message: '您确认删除这笔' + (itemData.typeId == 2 ? '-' : '') + Number(itemData.money).toFixed(2) + '账单吗？',
+            title: '删除账单',
+            message: '您确认删除这笔' + (itemData.typeId == 2 ? '-' : '') + Number(itemData.money).toFixed(2) + '账单吗？',
+        }).then(() => {
+            request('delete_bill', {
+                _id: itemData._id
+            }).then(result => {
+                console.log(result);
+                if (result.stats.removed == 1) {
+                    this.getBillData(false, true);
+                } else {
+                    app.toast('已删除' + result.stats.removed + '条账单数据');
+                }
             })
-            .then(() => {
-                request('delete_bill', {
-                    _id: itemData._id
-                }).then(result => {
-                    console.log(result);
-                    if (result.stats.removed == 1) {
-                        this.getBillData(false, true);
-                    } else {
-                        app.toast('已删除' + result.stats.removed + '条账单数据');
-                    }
-                })
-            })
-            .catch(() => {})
+        }).catch(() => { })
     },
 
     goShareBillLogin() {

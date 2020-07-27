@@ -47,13 +47,20 @@
                     </view>
                 </view>
                 <view class="bill-msg-box">
-                    <view class="money">
+                    <view class="money {{item.typeId == 2 ? 'red-color' : 'green-color'}}">
                         {{item.typeId == 2 ? '-' : ''}}{{price.toFixed(item.money)}}
                     </view>
                     <view class="detail">{{date.getGap(item.date.timeString)}}</view>
                 </view>
             </view>
             <view wx:if="{{item.comment}}" class="bill-comment-box">{{item.comment}}</view>
+        </view>
+        <view class="load-more-box">
+            <block wx:if="{{hasMore}}">
+                <van-loading type="spinner" size="40rpx" color="#848484" />
+                <view class="load-text load-text-padding">加载中...</view>
+            </block>
+            <view class="load-text" wx:else>没有更多数据了...</view>
         </view>
     </view>
     <view wx:else class="no-account-box">

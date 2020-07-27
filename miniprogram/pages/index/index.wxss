@@ -194,6 +194,14 @@
     margin-bottom: 10rpx;
 }
 
+.red-color {
+    color: #C7143D !important;
+}
+
+.green-color {
+    color: green !important;
+}
+
 .bill-msg-box>view.detail {
     height: 40rpx;
     display: flex;
@@ -233,4 +241,22 @@
 .icon-meiyoushuju {
     padding-bottom: 30rpx;
     font-size: 100rpx !important;
+}
+
+.load-more-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 80rpx;
+    line-height: 80rpx;
+}
+
+.load-text {
+    color: #848484;
+    font-size: 26rpx;
+}
+
+.load-text-padding {
+    padding-left: 20rpx;
 }

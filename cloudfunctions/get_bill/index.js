@@ -63,8 +63,10 @@ exports.main = async (event, context) => {
 
     let income = await sumMoney(whereObj, "1");
     let expense = await sumMoney(whereObj, "2");
+    let hasMore = count > event.pageSize * event.pageIndex;
 
     return {
+        hasMore: hasMore,
         count: count,
         income: income,
         expense: expense,
