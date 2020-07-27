@@ -11,7 +11,7 @@ exports.main = async (event, context) => {
         typeId: event.typeId,
         payAccountId: event.payAccountId,
         userAccountId: event.userAccountId,
-        money: event.money,
+        money: Number(event.money),
         date: event.date,
         comment: event.comment,
         createTime: db.serverDate(),
