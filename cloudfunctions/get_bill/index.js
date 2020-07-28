@@ -38,7 +38,7 @@ async function sumMoney(whereObj, typeId) {
             sumMoney: $.sum('$money')
         })
         .end()
-    return sum.list[0].sumMoney;
+    return sum.list.length ? sum.list[0].sumMoney : 0;
 }
 
 exports.main = async (event, context) => {
@@ -54,7 +54,7 @@ exports.main = async (event, context) => {
     if (event.selectBill) {
         whereObj.selectBill = event.selectBill;
     } else {
-        whereObj.openid = event.userInfo.openId;
+        whereObj.openid = event.userInfo && event.userInfo.openId;
         whereObj.selectBill = _.exists(false);
     }
 

@@ -37,12 +37,14 @@ create.Page(store, {
 
     watchStore(evt) {
         if (evt.hasOwnProperty('selectBill')) {
+            this.data.pageIndex = 1;
             this.getBillData(true);
         }
     },
 
     onPullDownRefresh() {
         wx.showNavigationBarLoading();
+        this.data.pageIndex = 1;
         this.getBillData(true);
     },
 
@@ -74,7 +76,7 @@ create.Page(store, {
         request('get_bill', {
             pageSize: this.data.pageSize,
             pageIndex: this.data.pageIndex
-        }, false, true).then(result => {
+        }, true, true).then(result => {
             if (pullDownRefresh) {
                 wx.hideNavigationBarLoading();
                 wx.stopPullDownRefresh();
@@ -87,6 +89,16 @@ create.Page(store, {
                     this.dealBillData(result, pullDownRefresh);
                 })
             }
+        }).catch(err => {
+            wx.hideLoading();
+            if (pullDownRefresh) {
+                wx.hideNavigationBarLoading();
+                wx.stopPullDownRefresh();
+            }
+            wx.showToast({
+                icon: 'none',
+                title: err.toString()
+            });
         })
     },
 
@@ -106,10 +118,8 @@ create.Page(store, {
             }
         }
         if (pullDownRefresh) {
-            this.data.pageIndex = 1;
             this.data.billList = result.data;
         } else {
-            this.data.pageIndex++;
             this.data.billList = this.data.billList.concat(result.data);
         }
         this.setData({
@@ -120,6 +130,7 @@ create.Page(store, {
             expense: result.expense,
             balance: utils.sub(result.income, result.expense)
         });
+        this.data.pageIndex++;
         wx.hideLoading();
     },
 
