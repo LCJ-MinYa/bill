@@ -42,10 +42,10 @@ create.Page(store, {
         }
     },
 
-    onPullDownRefresh() {
+    onPullDownRefresh(noUpdateAccount) {
         wx.showNavigationBarLoading();
         this.data.pageIndex = 1;
-        this.getBillData(true);
+        this.getBillData(true, noUpdateAccount);
     },
 
     onReachBottom() {
@@ -145,7 +145,7 @@ create.Page(store, {
             }).then(result => {
                 console.log(result);
                 if (result.stats.removed == 1) {
-                    this.getBillData(false, true);
+                    this.onPullDownRefresh(true);
                 } else {
                     app.toast('已删除' + result.stats.removed + '条账单数据');
                 }

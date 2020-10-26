@@ -15,5 +15,6 @@
         <view>随时花、随时记的记账好习惯</view>
         <view>当你银行卡或钱包鼓鼓的时候</view>
         <view>去更大的世界，追求诗与远方</view>
+        <view>当前版本号：{{$.appVersion || ''}}</view>
     </view>
 </view>

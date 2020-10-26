@@ -1,5 +1,6 @@
 export default {
     data: {
+        appVersion: '2.4.0',
         userInfo: null,
         shareBillList: [],
         selectBill: 'wx',
