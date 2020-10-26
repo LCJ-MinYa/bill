@@ -53,7 +53,7 @@ Page({
         }).then(result => {
             let pages = getCurrentPages();
             let lastPage = pages[pages.length - 5];
-            lastPage.getBillData && lastPage.getBillData(false, true);
+            lastPage.getBillData && lastPage.onPullDownRefresh();
             wx.navigateBack({ delta: 4 });
         })
     },
